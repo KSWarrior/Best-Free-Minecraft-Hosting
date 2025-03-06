@@ -82,6 +82,26 @@ body {
     text-shadow: 0 0 10px red;
 }
 
+/* Discord Button */
+.discord-button {
+    background-color: #5865F2; /* Discord blue */
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin: 15px 0;
+    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+    box-shadow: 0 0 10px #5865F2;
+}
+
+.discord-button:hover {
+    transform: scale(1.1);
+    box-shadow: 0 0 20px #5865F2;
+}
+
 /* Location */
 .location {
     font-size: 12px;
