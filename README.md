@@ -1,5 +1,5 @@
 Free Minecraft Hosts List!
-All of You get free minecraft hosting in this website: https://kswarrior.github.io/Free-hosting-list/
+All of You get free minecraft hosting in this website link https://kswarrior.github.io/Best-Free-Minecraft-Hosting/
 
 
 Join Discord Server for information about any Free Hosting add or remove https://discord.gg/YxA4aAfXKT
