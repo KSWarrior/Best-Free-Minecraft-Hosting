@@ -1,5 +1,5 @@
 Free Minecraft Hosts List!
-I decided to concentrate the updates on the website: https://fmhl.devloo.xyz/ I won't let the github list rotting but I won't update as much as the website.
+I decided to concentrate the updates on the website: https://kswarrior.github.io/Free-hosting-list/ I won't let the github list rotting but I won't update as much as the website.
 The website is fully operational; if you have suggestions, please contact us at devloo@devloo.xyz. We are always open to new ideas!
 GitHub Repo stars
 
