@@ -18,8 +18,8 @@ header {
 main {
     background-color: black;
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
-    gap: 5px;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 2px;
 }
 
 .cards {
@@ -28,7 +28,7 @@ main {
     border-radius: 10px;
     padding: 15px;
     height: 150px;
-    width: 90px;
+    width: 157px;
     position: relative;
     box-shadow: 0 0 5px #3fff05;
 }
@@ -55,12 +55,12 @@ main {
     background: rgba(255, 255, 255, 0.1);
 }
 
-.online {
+.yes {
     color: #3fff05;
     text-shadow: 0 0 5px #3fff05;
 }
 
-.offline {
+.no {
   color: red;
   text-shadow: 0 0 5px red;
 }
@@ -69,7 +69,7 @@ main {
     background-color: #3fff05;
     color: black;
     border: none;
-    padding: 8px 38px;
+    padding: 8px 70px;
     font-size: 8px;
     font-weight: bold;
     border-radius: 5px;
