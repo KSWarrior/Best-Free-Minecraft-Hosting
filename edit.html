@@ -2,175 +2,51 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Hosting Manager</title>
+  <title>Add Hosting</title>
   <style>
-    body {
-      font-family: Arial, sans-serif;
-      padding: 20px;
-      background: #f0f0f0;
-    }
-    h1 {
-      text-align: center;
-    }
-    .form-group {
-      margin-bottom: 10px;
-    }
-    label {
-      display: block;
-      margin-bottom: 3px;
-    }
-    input, select {
-      width: 100%;
-      padding: 8px;
-      margin-top: 3px;
-    }
-    .btn {
-      padding: 10px 15px;
-      margin: 5px;
-      border: none;
-      cursor: pointer;
-      border-radius: 4px;
-    }
-    .btn-add {
-      background-color: #4CAF50;
-      color: white;
-    }
-    .btn-edit {
-      background-color: #2196F3;
-      color: white;
-    }
-    .btn-delete {
-      background-color: #f44336;
-      color: white;
-    }
-    .hosting-entry {
-      background: white;
-      padding: 15px;
-      margin-top: 10px;
-      border-radius: 5px;
-      box-shadow: 0 0 3px rgba(0,0,0,0.2);
-    }
+    body { font-family: Arial; padding: 20px; background: #f0f0f0; }
+    h1 { text-align: center; }
+    .form-group { margin-bottom: 10px; }
+    label { display: block; margin-bottom: 5px; }
+    input, select { width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 4px; }
+    .btn { padding: 10px 15px; background: #4CAF50; color: white; border: none; cursor: pointer; border-radius: 4px; margin-top: 10px; }
+    a.back { display: inline-block; margin-top: 15px; color: #333; text-decoration: underline; }
   </style>
 </head>
 <body>
-  <h1>Manage Hostings</h1>
-  <div id="form">
-    <div class="form-group">
-      <label for="name">Hosting Name</label>
-      <input type="text" id="name" />
-    </div>
-    <div class="form-group">
-      <label for="ram">RAM</label>
-      <input type="text" id="ram" />
-    </div>
-    <div class="form-group">
-      <label for="cpu">CPU</label>
-      <input type="text" id="cpu" />
-    </div>
-    <div class="form-group">
-      <label for="disk">Disk</label>
-      <input type="text" id="disk" />
-    </div>
-    <div class="form-group">
-      <label for="location">Location</label>
-      <input type="text" id="location" />
-    </div>
-    <div class="form-group">
-      <label>
-        <input type="checkbox" id="alwaysOn" />
-        24/7 Available
-      </label>
-    </div>
-    <button class="btn btn-add" onclick="addHosting()">Add Hosting</button>
-    <button class="btn btn-edit" onclick="updateHosting()" style="display:none" id="updateBtn">Update Hosting</button>
-  </div>
+  <h1>Add Hosting</h1>
 
-  <div id="hostingsContainer"></div>
+  <div class="form-group"><label>Hosting Name</label><input type="text" id="name" /></div>
+  <div class="form-group"><label>RAM</label><input type="text" id="ram" /></div>
+  <div class="form-group"><label>CPU</label><input type="text" id="cpu" /></div>
+  <div class="form-group"><label>Disk</label><input type="text" id="disk" /></div>
+  <div class="form-group"><label>Location</label><input type="text" id="location" /></div>
+  <div class="form-group"><label>Hosting URL</label><input type="url" id="url" /></div>
+  <div class="form-group"><label><input type="checkbox" id="alwaysOn" /> 24/7 Available</label></div>
+
+  <button class="btn" onclick="addHosting()">Add Hosting</button>
+  <br><a class="back" href="index.html">← Back to Hosting List</a>
 
   <script>
-    let hostings = [];
-    let editingIndex = -1;
-
     function addHosting() {
-      const name = document.getElementById('name').value;
-      const ram = document.getElementById('ram').value;
-      const cpu = document.getElementById('cpu').value;
-      const disk = document.getElementById('disk').value;
-      const location = document.getElementById('location').value;
+      const name = document.getElementById('name').value.trim();
+      const ram = document.getElementById('ram').value.trim();
+      const cpu = document.getElementById('cpu').value.trim();
+      const disk = document.getElementById('disk').value.trim();
+      const location = document.getElementById('location').value.trim();
+      const url = document.getElementById('url').value.trim();
       const alwaysOn = document.getElementById('alwaysOn').checked;
 
-      if (!name || !ram || !cpu || !disk || !location) {
-        alert('Please fill all fields');
+      if (!name || !ram || !cpu || !disk || !location || !url) {
+        alert("Please fill out all fields.");
         return;
       }
 
-      hostings.push({ name, ram, cpu, disk, location, alwaysOn });
-      clearForm();
-      renderHostings();
-    }
+      const hostings = JSON.parse(localStorage.getItem('hostings')) || [];
+      hostings.push({ name, ram, cpu, disk, location, url, alwaysOn });
+      localStorage.setItem('hostings', JSON.stringify(hostings));
 
-    function editHosting(index) {
-      const hosting = hostings[index];
-      document.getElementById('name').value = hosting.name;
-      document.getElementById('ram').value = hosting.ram;
-      document.getElementById('cpu').value = hosting.cpu;
-      document.getElementById('disk').value = hosting.disk;
-      document.getElementById('location').value = hosting.location;
-      document.getElementById('alwaysOn').checked = hosting.alwaysOn;
-
-      editingIndex = index;
-      document.querySelector('.btn-add').style.display = 'none';
-      document.getElementById('updateBtn').style.display = 'inline-block';
-    }
-
-    function updateHosting() {
-      const name = document.getElementById('name').value;
-      const ram = document.getElementById('ram').value;
-      const cpu = document.getElementById('cpu').value;
-      const disk = document.getElementById('disk').value;
-      const location = document.getElementById('location').value;
-      const alwaysOn = document.getElementById('alwaysOn').checked;
-
-      if (editingIndex >= 0) {
-        hostings[editingIndex] = { name, ram, cpu, disk, location, alwaysOn };
-        editingIndex = -1;
-        document.querySelector('.btn-add').style.display = 'inline-block';
-        document.getElementById('updateBtn').style.display = 'none';
-        clearForm();
-        renderHostings();
-      }
-    }
-
-    function deleteHosting(index) {
-      hostings.splice(index, 1);
-      renderHostings();
-    }
-
-    function clearForm() {
-      document.getElementById('name').value = '';
-      document.getElementById('ram').value = '';
-      document.getElementById('cpu').value = '';
-      document.getElementById('disk').value = '';
-      document.getElementById('location').value = '';
-      document.getElementById('alwaysOn').checked = false;
-    }
-
-    function renderHostings() {
-      const container = document.getElementById('hostingsContainer');
-      container.innerHTML = '';
-      hostings.forEach((hosting, index) => {
-        const div = document.createElement('div');
-        div.className = 'hosting-entry';
-        div.innerHTML = `
-          <strong>${hosting.name}</strong><br>
-          RAM: ${hosting.ram} | CPU: ${hosting.cpu} | Disk: ${hosting.disk} <br>
-          Location: ${hosting.location} | 24/7: ${hosting.alwaysOn ? 'Yes' : 'No'}<br>
-          <button class="btn btn-edit" onclick="editHosting(${index})">Edit</button>
-          <button class="btn btn-delete" onclick="deleteHosting(${index})">Delete</button>
-        `;
-        container.appendChild(div);
-      });
+      window.location.href = "index.html";
     }
   </script>
 </body>
