@@ -12,7 +12,6 @@
     </header>
 
     <main>
-      <div id="hostingList"></div>
       
       <section class="cards">
         <h3 class="name">Vertex Hosting</h3>
@@ -369,27 +368,6 @@
     <footer>
         &copy; 2025 by KS Warrior
     </footer>
-
-    <script>
-  const hostings = JSON.parse(localStorage.getItem('hostings')) || [];
-  const container = document.getElementById('hostingList');
-
-  hostings.forEach(host => {
-    const card = document.createElement('section');
-    card.className = 'cards';
-    card.innerHTML = `
-      <h3 class="name">${host.name}</h3>
-      <div class="all-info">
-        <h5 class="info">Ram : ${host.ram} | CPU : ${host.cpu}</h5>
-        <h5 class="info">Storage : ${host.disk} | <span class="${host.alwaysOn ? 'online' : 'offline'}">${host.alwaysOn ? '24/7' : 'Not 24/7'}</span></h5>
-        <h5 class="info">${host.location}</h5>
-      </div>
-      <button class="visit" onclick="window.open('${host.url}', '_blank')">Visit</button>
-    `;
-    container.appendChild(card);
-  });
-    </script>
-    
 
 </body>
 </html>
