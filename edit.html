@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Manage Hostings</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+    }
+
+    h2 {
+      margin-bottom: 10px;
+    }
+
+    input, select, button {
+      margin: 5px;
+      padding: 8px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+    }
+
+    th, td {
+      border: 1px solid #ccc;
+      padding: 10px;
+      text-align: left;
+    }
+
+    button.edit, button.delete {
+      margin-right: 5px;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>Add Hosting</h2>
+
+  <div id="form">
+    <input type="text" id="name" placeholder="Hosting Name">
+    <input type="text" id="ram" placeholder="RAM (e.g., 2GB)">
+    <input type="text" id="cpu" placeholder="CPU (e.g., 2 Cores)">
+    <input type="text" id="disk" placeholder="Disk (e.g., 10GB)">
+    <select id="uptime">
+      <option value="Yes">24/7: Yes</option>
+      <option value="No">24/7: No</option>
+    </select>
+    <input type="text" id="location" placeholder="Location">
+    <button onclick="addHosting()">Add</button>
+    <button onclick="updateHosting()" style="display:none;" id="updateBtn">Update</button>
+  </div>
+
+  <table id="hostingTable">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>RAM</th>
+        <th>CPU</th>
+        <th>Disk</th>
+        <th>24/7</th>
+        <th>Location</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody></tbody>
+  </table>
+
+  <script>
+    let editIndex = -1;
+
+    function addHosting() {
+      const name = document.getElementById('name').value;
+      const ram = document.getElementById('ram').value;
+      const cpu = document.getElementById('cpu').value;
+      const disk = document.getElementById('disk').value;
+      const uptime = document.getElementById('uptime').value;
+      const location = document.getElementById('location').value;
+
+      if (!name || !ram || !cpu || !disk || !location) {
+        alert("Please fill all fields.");
+        return;
+      }
+
+      const table = document.getElementById('hostingTable').getElementsByTagName('tbody')[0];
+      const newRow = table.insertRow();
+
+      newRow.innerHTML = `
+        <td>${name}</td>
+        <td>${ram}</td>
+        <td>${cpu}</td>
+        <td>${disk}</td>
+        <td>${uptime}</td>
+        <td>${location}</td>
+        <td>
+          <button class="edit" onclick="editHosting(this)">Edit</button>
+          <button class="delete" onclick="deleteHosting(this)">Remove</button>
+        </td>
+      `;
+
+      clearForm();
+    }
+
+    function editHosting(btn) {
+      const row = btn.parentNode.parentNode;
+      editIndex = row.rowIndex - 1;
+
+      document.getElementById('name').value = row.cells[0].innerText;
+      document.getElementById('ram').value = row.cells[1].innerText;
+      document.getElementById('cpu').value = row.cells[2].innerText;
+      document.getElementById('disk').value = row.cells[3].innerText;
+      document.getElementById('uptime').value = row.cells[4].innerText;
+      document.getElementById('location').value = row.cells[5].innerText;
+
+      document.querySelector("button[onclick='addHosting()']").style.display = "none";
+      document.getElementById("updateBtn").style.display = "inline-block";
+    }
+
+    function updateHosting() {
+      const table = document.getElementById('hostingTable').getElementsByTagName('tbody')[0];
+      const row = table.rows[editIndex];
+
+      row.cells[0].innerText = document.getElementById('name').value;
+      row.cells[1].innerText = document.getElementById('ram').value;
+      row.cells[2].innerText = document.getElementById('cpu').value;
+      row.cells[3].innerText = document.getElementById('disk').value;
+      row.cells[4].innerText = document.getElementById('uptime').value;
+      row.cells[5].innerText = document.getElementById('location').value;
+
+      clearForm();
+
+      document.querySelector("button[onclick='addHosting()']").style.display = "inline-block";
+      document.getElementById("updateBtn").style.display = "none";
+    }
+
+    function deleteHosting(btn) {
+      const row = btn.parentNode.parentNode;
+      row.remove();
+      clearForm();
+    }
+
+    function clearForm() {
+      document.getElementById('name').value = '';
+      document.getElementById('ram').value = '';
+      document.getElementById('cpu').value = '';
+      document.getElementById('disk').value = '';
+      document.getElementById('uptime').value = 'Yes';
+      document.getElementById('location').value = '';
+    }
+  </script>
+
+</body>
+</html>
