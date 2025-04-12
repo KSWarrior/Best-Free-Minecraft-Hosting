@@ -1,19 +1,140 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Free Hosting List</title>
-    <link rel="stylesheet" href="styles.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Best Free Minecraft Hosting</title>
+  <style>
+    /* Global styles */
+    body {
+      margin: 0;
+      padding: 0;
+      background-color: #000;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      color: white;
+      text-align: center;
+      overflow-x: hidden;
+    }
+
+    .title {
+      font-size: 2.5em;
+      color: limegreen;
+      margin: 40px 0 20px;
+      text-shadow: 0 0 15px limegreen;
+      animation: fadeIn 1s ease-out;
+    }
+
+    .container {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 25px;
+      padding: 30px;
+      animation: fadeInUp 1s ease-out;
+    }
+
+    /* Card styles */
+    .cards {
+      background: linear-gradient(145deg, #0a0a0a, #1a1a1a);
+      border: 2px solid limegreen;
+      border-radius: 15px;
+      padding: 32px;
+      width: 270px;
+      box-shadow: 0 0 20px #00ff88;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      animation: glowFade 2s ease infinite alternate;
+    }
+
+    .cards:hover {
+      transform: translateY(-8px) scale(1.03);
+      box-shadow: 0 0 40px #00ff88;
+    }
+
+    .name {
+      font-size: 1.6em;
+      margin-bottom: 18px;
+      color: #fff;
+      text-shadow: 0 0 8px limegreen;
+    }
+
+    .all-info {
+      margin-bottom: 20px;
+    }
+
+    .info {
+      font-size: 1em;
+      margin: 10px 0;
+      color: #ccc;
+      padding: 6px 12px;
+      background: rgba(255, 255, 255, 0.06);
+      border-radius: 10px;
+      display: inline-block;
+      transition: background 0.3s;
+    }
+
+    .info:hover {
+      background: rgba(0, 255, 100, 0.15);
+    }
+
+    .online {
+      color: #00ff88;
+      font-weight: bold;
+      text-shadow: 0 0 5px #00ff88;
+    }
+
+    .visit {
+      background-color: limegreen;
+      color: black;
+      border: none;
+      padding: 12px 25px;
+      border-radius: 12px;
+      font-weight: bold;
+      font-size: 1em;
+      cursor: pointer;
+      transition: background-color 0.3s ease, transform 0.3s ease;
+      animation: pulse 2s infinite;
+    }
+
+    .visit:hover {
+      background-color: #00ff66;
+      transform: scale(1.05);
+    }
+
+    /* Animations */
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes glowFade {
+      from { box-shadow: 0 0 10px #00ff88; }
+      to { box-shadow: 0 0 20px #00ff88; }
+    }
+
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+      100% { transform: scale(1); }
+    }
+
+    @media (max-width: 600px) {
+      .cards {
+        width: 90%;
+      }
+    }
+  </style>
 </head>
 <body>
-    <header>
-        <h1>Free Hosting List</h1>
-    </header>
 
-    <main>
-      
-      <section class="cards">
+  <h1 class="title">Best Free Minecraft Hosting</h1>
+
+  <div class="container">
+    <section class="cards">
         <h3 class="name">Vertex Hosting</h3>
         <div class="all-info">
         <h5 class="info">Ram : 4GB | CPU : unlimited</h5>
@@ -362,12 +483,8 @@
         </div>
         <button class="visit" onclick="window.location.href='https://freezehost.pro/'">Visit</button>
       </section>
-      
-    </main>
-
-    <footer>
-        &copy; 2025 by KS Warrior
-    </footer>
+    </section>
+  </div>
 
 </body>
-</html>
+    </html>
